@@ -2,6 +2,10 @@
 
 An AI-powered data analysis application that helps users analyze CSV/EXCEL data through natural language questions. Built with Streamlit, LangChain,Langgraph, and GPT-4o-mini.
 
+## Workflow
+
+![workflow](https://github.com/user-attachments/assets/3e990c3d-63e0-4e69-93c2-95a29ffd5fb8)
+
 ## Features
 
 - Upload and analyze CSV/EXCEL files
