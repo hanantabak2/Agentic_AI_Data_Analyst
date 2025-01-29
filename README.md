@@ -15,7 +15,7 @@ An AI-powered data analysis application that helps users analyze CSV/EXCEL data 
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
+git clone [<repository-url>](https://github.com/JoshiSneh/Data_Visualization_Python_Langgraph.git)
 cd streamlit-app
 ```
 
