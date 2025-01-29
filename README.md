@@ -1,6 +1,10 @@
-# Data Analysis Assistant
+# Data Analysis Project
 
-An AI-powered data analysis application that helps users analyze CSV/EXCEL data through natural language questions. Built with Streamlit, LangChain,Langgraph, and GPT-4o-mini.
+This data analysis application helps users analyze CSV/EXCEL data through natural language questions allowing users to questions about a dataset and receive insightful visual representations in response.
+
+## Workflow
+
+![workflow](https://github.com/user-attachments/assets/3e990c3d-63e0-4e69-93c2-95a29ffd5fb8)
 
 ## Features
 
@@ -15,8 +19,8 @@ An AI-powered data analysis application that helps users analyze CSV/EXCEL data 
 
 1. Clone the repository:
 ```bash
-git clone <repository-url>
-cd streamlit-app
+git clone https://github.com/JoshiSneh/Data_Visualization_Python_Langgraph.git
+cd Data_Visualization_Python_Langgraph
 ```
 
 2. Create a virtual environment and activate it:
@@ -29,13 +33,7 @@ source venv/bin/activate  # On Windows, use: venv\Scripts\activate
 ```bash
 pip install -r requirements.txt
 ```
-
-4. Create a `.env` file in the root directory and add your OpenAI API key:
-```
-OPENAI_API_KEY=your-api-key-here
-```
-
-5. Run the Streamlit app:
+4. Run the Streamlit app:
 ```bash
 streamlit run app.py
 ```
