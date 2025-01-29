@@ -1,0 +1,11 @@
+langchain-openai
+langchain-community
+langchain-core
+langchain-deepseek
+langgraph
+pandas
+plotly
+python-dotenv
+pydantic
+streamlit
+typing-extensions
