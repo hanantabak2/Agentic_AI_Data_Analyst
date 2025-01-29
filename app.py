@@ -96,7 +96,6 @@ if uploaded_file is not None:
             st.error("The uploaded file contains no data. Please check the file content.")
             st.stop()
         
-
         try:
             llm = ChatOpenAI(
                 model="gpt-4o-mini",
@@ -256,7 +255,7 @@ else:
 #     task: str = Field(None, description="Step-by-step detailed task description for the user query that need to be performed.")
 #     column_name: str = Field(None, description="Provide all the column names used for Task, formatted as a comma-separated.")
 #     key_names: List[str] = Field(None, description="List of keys to be used in the final output dictionary.")
-#     values: dict = Field(None, description="Dictionary containing the final results of the task plan with Key-Value pairs.")
+#     values: List[str] = Field(None,description="List containing the final results of the task plan with Key-Value pairs.")
 
 # class Tasks(BaseModel):
 #     tasks: List[Task] = Field(
@@ -520,6 +519,6 @@ else:
 #     st.caption(f"Total Tokens: {cb.total_tokens}")
 #     st.caption(f"Total Cost: ${cb.total_cost}")
     
-    # st.image(image_data,width=200)
+#     st.image(image_data,width=200)
 
 
