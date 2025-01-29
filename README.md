@@ -1,6 +1,6 @@
-# Data Analysis Assistant
+# Data Analysis Project
 
-An AI-powered data analysis application that helps users analyze CSV/EXCEL data through natural language questions. Built with Streamlit, LangChain,Langgraph, and GPT-4o-mini.
+This data analysis application helps users analyze CSV/EXCEL data through natural language questions allowing users to questions about a dataset and receive insightful visual representations in response.
 
 ## Workflow
 
