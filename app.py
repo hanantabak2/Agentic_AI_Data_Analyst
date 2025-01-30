@@ -15,15 +15,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-if "analysis_state" not in st.session_state:
-    st.session_state.analysis_state = None
-if "progress" not in st.session_state:
-    st.session_state.progress = 0
-
-def reset_analysis_state():
-    st.session_state.analysis_state = None
-    st.session_state.progress = 0
-
 with st.sidebar:
     st.title("⚙️ Configuration")
     st.divider()
@@ -110,7 +101,7 @@ if uploaded_file:
                 st.stop()
 
             try:
-                with st.status("🤖 Analysis in Progress", state="running") as status:
+                with st.status(label="🤖 Analysis in Progress", state="running") as status:
                     with get_openai_callback() as cb:
                         
                         state = workflow.invoke({
@@ -150,8 +141,7 @@ if uploaded_file:
                             st.caption(f"Total Tokens Used: {cb.total_tokens}")
                         with col2:
                             st.caption(f"Analysis Cost: ${cb.total_cost:.4f}")
-
-                        status.update(label="✅ Analysis Complete", state="complete")
+                status.update(label="✅ Analysis Complete", state="complete")
 
 
             except Exception as e:
