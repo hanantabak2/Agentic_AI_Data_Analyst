@@ -110,7 +110,7 @@ if uploaded_file is not None:
             st.stop()
         
         with st.expander("Preview Data"):
-            st.dataframe(df.head(), use_container_width=True)
+            st.dataframe(df, use_container_width=True)
             st.caption(f"Total rows: {len(df)}, Total columns: {len(df.columns)}")
         
         question = st.text_input(
@@ -125,6 +125,7 @@ if uploaded_file is not None:
             
             try:
                 with st.spinner("Analyzing your data..."):
+                    # config = {"configurable": {"thread_id": "1"}}
                     with get_openai_callback() as cb:
                         state = worflow.invoke({
                             "user_query": question,
@@ -134,12 +135,13 @@ if uploaded_file is not None:
                     
                     st.subheader("Analysis Plan")
                     print(state["task_plan"])
-                    for index, task in enumerate(state["task_plan"]):
-                        st.markdown(f"**Step {index}**: {task.task}")
-                        # if index == len(state["task_plan"])-1:
-                        #         st.write(f"{task.key_names}")
-                        #         for value in task.values:
-                        #             st.write(f"{value}")
+                    st.code(state["task_plan"], language='python')
+                    # for index, task in enumerate(state["task_plan"],1):
+                    #     st.markdown(f"**Step {index}**: {task.task}")
+                    #     if index == len(state["task_plan"])-1:
+                    #             st.write(f"{task.key_names}")
+                    #             for value in task.values:
+                    #                 st.write(f"{value}")
                     
                     with st.expander("View Generated Code"):
                         st.code(state["code"], language='python')

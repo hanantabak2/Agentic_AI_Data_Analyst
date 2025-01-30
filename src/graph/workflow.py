@@ -1,7 +1,10 @@
 from langchain_core.prompts import ChatPromptTemplate
 from langgraph.graph import StateGraph, START, END
 
-from src.models.state_models import Tasks, Code, State
+# from langgraph.checkpoint.memory import MemorySaver
+# memory = MemorySaver()
+
+from src.models.state_models import Code, State
 
 from src.prompts.system_prompts import (
     TASK_PLANNER_PROMPT,
@@ -19,8 +22,8 @@ def create_workflow(llm, df):
             ("system", TASK_PLANNER_PROMPT),
             ("human", "===Dataframe Schema:\n{data_frame_preview}\n\n===Available Columns:\n{available_columns}\n\n===Column Data Types:\n{column_data_types}\n\n===User Question:\n{user_question}\n")
         ])
-        
-        task_planner_llm = llm.with_structured_output(Tasks)
+
+        task_planner_llm = llm
         task_chain = prompt | task_planner_llm
         response = task_chain.invoke({
             "data_frame_preview": data_frame_preview,
@@ -29,7 +32,7 @@ def create_workflow(llm, df):
             "user_question": state["user_query"]
         })
 
-        return {"task_plan": response.tasks}
+        return {"task_plan": response.content}
 
     def execute_task(state: State) -> dict:
         error = state["error"]
