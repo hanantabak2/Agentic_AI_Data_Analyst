@@ -92,8 +92,8 @@ output_dict = pd.DataFrame({{
 - Values should never be a Dictionary or List.
 output_dict = {{
     'Key-1': Value-2,
-    'Key-2': Values-2, 
-    'Key-3': Values-3, 
+    'Key-2': Value-2, 
+    'Key-3': Value-3, 
     [...]
 }}
 """
