@@ -155,14 +155,12 @@ if uploaded_file is not None:
                                 st.dataframe(value, use_container_width=True)
                                 buffer = io.StringIO()
                                 value.to_csv(buffer, index=False)
-                                st.download_button(
-                                    label="📥 Download as CSV",
-                                    data=buffer.getvalue(),
-                                    file_name=f"{key.lower().replace(' ', '_')}.csv",
-                                    mime="text/csv"
-                                )
                             elif isinstance(value, go.Figure):
                                 st.plotly_chart(value, use_container_width=True)
+                            elif isinstance(value, pd.Series):
+                                df = pd.DataFrame(value)
+                                st.write(f"📈 {key}")
+                                st.dataframe(value, use_container_width=True)
                             else:
                                 st.info(f"{key}: {value}")
                     else:
