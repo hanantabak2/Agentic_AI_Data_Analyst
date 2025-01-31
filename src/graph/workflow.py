@@ -12,11 +12,26 @@ from src.prompts.system_prompts import (
     FORMAT_RESULT_PROMPT
 )
 
+def df_schema_preview(df):
+    data_frame_preview = df.head(2).to_markdown()
+
+    available_columns = "| Column Name |\n|--------|\n"
+    for col in df.columns:
+        available_columns += f"| {col} |\n"
+
+    column_data_types = "| Column Name | Data Type |\n|---------|--------|\n"
+    for col, dtype in df.dtypes.items():
+        column_data_types += f"| {col} | {dtype} |\n"
+    
+    return data_frame_preview, available_columns, column_data_types
+
 def create_workflow(llm, df):
     def plan_task(state: State) -> dict:
-        data_frame_preview = "\n".join([f"- **{col}**: {dtype}" for col, dtype in df.items()])
-        available_columns = ', '.join(df.columns)
-        column_data_types = "\n".join([f"- **{col}**: {dtype}" for col, dtype in df.dtypes.items()])
+        # data_frame_preview = df.head(2).to_markdown()
+        # available_columns = ', '.join(df.columns)
+        # column_data_types = "\n".join([f"- **{col}**: {dtype}" for col, dtype in df.dtypes.items()])
+
+        data_frame_preview, available_columns, column_data_types = df_schema_preview(df)
 
         prompt = ChatPromptTemplate.from_messages([
             ("system", TASK_PLANNER_PROMPT),
@@ -52,10 +67,11 @@ def create_workflow(llm, df):
                 ("system", PYTHON_CODE_PROMPT),
                 ("human", "===Dataframe Schema:\n{data_frame_preview}\n\n===Available Columns:\n{available_columns}\n\n===Column Data Types:\n{column_data_types}\n\n===Execution Plan:\n{execution_plan}\n\n===User Question:\n{user_question}\n\n")
             ])
+            # data_frame_preview = df.head(2).to_markdown()
+            # available_columns = ', '.join(df.columns)
+            # column_data_types = "\n".join([f"- **{col}**: {dtype}" for col, dtype in df.dtypes.items()])
 
-            data_frame_preview = "\n".join([f"- **{col}**: {dtype}" for col, dtype in df.items()])
-            available_columns = ', '.join(df.columns)
-            column_data_types = "\n".join([f"- **{col}**: {dtype}" for col, dtype in df.dtypes.items()])
+            data_frame_preview, available_columns, column_data_types = df_schema_preview(df)
             
             task_plan = state["task_plan"]
             code_llm = llm.with_structured_output(Code)
@@ -67,7 +83,6 @@ def create_workflow(llm, df):
                 "column_data_types": column_data_types,
                 "execution_plan": task_plan,
                 "user_question": state["user_query"],
-                "error": state["error"]
             })
 
             iterations = state["iterations"]
