@@ -11,7 +11,6 @@ This data analysis application helps users analyze CSV/EXCEL data through natura
 - Upload and analyze CSV/EXCEL files
 - Ask questions about your data in natural language
 - Get automated data analysis and visualizations
-- Download processed data as CSV
 - View detailed analysis plans and generated code
 - Interactive visualizations using Plotly
 
