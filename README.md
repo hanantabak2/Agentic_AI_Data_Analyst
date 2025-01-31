@@ -11,7 +11,6 @@ This data analysis application helps users analyze CSV/EXCEL data through natura
 - Upload and analyze CSV/EXCEL files
 - Ask questions about your data in natural language
 - Get automated data analysis and visualizations
-- Download processed data as CSV
 - View detailed analysis plans and generated code
 - Interactive visualizations using Plotly
 
@@ -43,7 +42,7 @@ streamlit run app.py
 1. Upload your CSV/EXCEL file using the file uploader
 2. View a preview of your data
 3. Ask questions about your data in natural language
-4. Explore the results, visualizations, and download processed data
+4. Explore the results, visualizations
 
 ## Dependencies
 
