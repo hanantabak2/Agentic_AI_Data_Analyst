@@ -36,8 +36,7 @@ Step-1: Precise action description
 Step-2: Precise action description
 
 Step-N: Precise action description - Compile the processed results and store them in the final output dictionary named `output_dict`
-- Key Names: [Provide all the key names used in the `output_dict` dictionary.]
-- Values: {{"Key-1": "variable name to be used with short description", "Key-2": "variable name to be used with short description", ...}}
+- output_dict: {{"Key-1": "Variable name to be used here", "Key-2": "Variable name to be used here", ...}}
 
 **Provide only the task plan description. Do not include any additional explanations or commentary or python code or output or any other information**
 """
