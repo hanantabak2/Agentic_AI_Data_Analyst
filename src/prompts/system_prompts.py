@@ -37,7 +37,7 @@ Step-2: Precise action description
 
 Step-N: Precise action description - Compile the processed results and store them in the final output dictionary named `output_dict`
 - Key Names: [Provide all the key names used in the `output_dict` dictionary.]
-- Values: [For each key, describe the expected value, including details of the information it should contain, formatted as a dictionary: {{"Key-1": "Description of the information contained in this key", "Key-2": "Description of the information contained in this key", ...}}]
+- Values: {{"Key-1": "Description of the information contained in this key", "Key-2": "Description of the information contained in this key", ...}}
 
 **Provide only the task plan description. Do not include any additional explanations or commentary or python code or output or any other information**
 """
