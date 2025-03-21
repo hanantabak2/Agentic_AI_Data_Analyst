@@ -1,9 +1,6 @@
 from langchain_core.prompts import ChatPromptTemplate
 from langgraph.graph import StateGraph, START, END
 
-# from langgraph.checkpoint.memory import MemorySaver
-# memory = MemorySaver()
-
 from src.models.state_models import Code, State
 
 from src.prompts.system_prompts import (
@@ -27,15 +24,24 @@ def df_schema_preview(df):
 
 def create_workflow(llm, df):
     def plan_task(state: State) -> dict:
-        # data_frame_preview = df.head(2).to_markdown()
-        # available_columns = ', '.join(df.columns)
-        # column_data_types = "\n".join([f"- **{col}**: {dtype}" for col, dtype in df.dtypes.items()])
 
         data_frame_preview, available_columns, column_data_types = df_schema_preview(df)
 
         prompt = ChatPromptTemplate.from_messages([
             ("system", TASK_PLANNER_PROMPT),
-            ("human", "===Dataframe Schema:\n{data_frame_preview}\n\n===Available Columns:\n{available_columns}\n\n===Column Data Types:\n{column_data_types}\n\n===User Question:\n{user_question}\n")
+            ("human", """Dataframe Schema:
+             {data_frame_preview}
+
+             Available Columns:
+             {available_columns}
+             
+             Column Data Types:
+             {column_data_types}
+             
+             User Question:
+             {user_question}
+             
+             Give a proper task plan to solve the user query:""")
         ])
 
         task_planner_llm = llm
@@ -65,11 +71,23 @@ def create_workflow(llm, df):
         else:
             prompt = ChatPromptTemplate.from_messages([
                 ("system", PYTHON_CODE_PROMPT),
-                ("human", "===Dataframe Schema:\n{data_frame_preview}\n\n===Available Columns:\n{available_columns}\n\n===Column Data Types:\n{column_data_types}\n\n===Execution Plan:\n{execution_plan}\n\n===User Question:\n{user_question}\n\n")
+                ("human", """Dataframe Schema:
+                 {data_frame_preview}
+                 
+                 Available Columns:
+                 {available_columns}
+                 
+                 Column Data Types:
+                 {column_data_types}
+                 
+                 Execution Plan:
+                 {execution_plan}
+                 
+                 User Question:
+                 {user_question}
+                 
+                 Write the correct Python code to perform the task plan:""")
             ])
-            # data_frame_preview = df.head(2).to_markdown()
-            # available_columns = ', '.join(df.columns)
-            # column_data_types = "\n".join([f"- **{col}**: {dtype}" for col, dtype in df.dtypes.items()])
 
             data_frame_preview, available_columns, column_data_types = df_schema_preview(df)
             
@@ -140,7 +158,13 @@ def create_workflow(llm, df):
     def format_result(state: State) -> dict:
         prompt = ChatPromptTemplate.from_messages([
             ("system", FORMAT_RESULT_PROMPT),
-            ("human", "===User Question:\n{user_question}\n\n===Python Results:\n{result}\n\nFormatted response:"),
+            ("human", """User Question:
+             {user_question}
+             
+             Python Results:
+             {result}
+             
+             Formatted response:"""),
         ])
         
         format_chain = prompt | llm
