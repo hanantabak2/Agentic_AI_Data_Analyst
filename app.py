@@ -5,7 +5,6 @@ import time
 
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-from langchain_anthropic import ChatAnthropic
 from langchain_community.callbacks.manager import get_openai_callback
 
 from src.graph.workflow import create_workflow
@@ -80,13 +79,6 @@ if uploaded_file:
             top_p=0.2,
             api_key=st.session_state.openai_api_key
         )
-
-        # llm = ChatAnthropic(
-        #     model="claude-3-7-sonnet-latest",
-        #     temperature=0,
-        #     top_p=0.2,
-        #     api_key=st.session_state.openai_api_key
-        # )
 
         workflow = create_workflow(llm, df)
 
