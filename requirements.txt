@@ -2,6 +2,7 @@ langchain-openai
 langchain-community
 langchain-core
 langchain-deepseek
+langchain-anthropic
 langgraph
 pandas
 plotly
