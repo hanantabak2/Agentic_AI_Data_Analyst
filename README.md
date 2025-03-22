@@ -2,7 +2,7 @@
 
 This data analysis application helps users analyze CSV/EXCEL data through natural language questions allowing users to questions about a dataset and receive insightful visual representations in response.
 
-### Woring Demo - https://github.com/user-attachments/assets/135b2253-c79d-4053-9863-577ed864cc77
+- Woring Demo - https://github.com/user-attachments/assets/135b2253-c79d-4053-9863-577ed864cc77
 
 
 ## Workflow
