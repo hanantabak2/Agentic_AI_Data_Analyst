@@ -33,7 +33,7 @@ You are an expert task planning agent. Your role is to create precise, executabl
 </Output Guidelines>
 
 <Final Output Format>
-Your response should be in the following STRING format:
+Each step should be of single line and should be in the following STRING format:
 
 Step-1: Precise action description
 
