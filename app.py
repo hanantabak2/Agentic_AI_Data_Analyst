@@ -5,6 +5,8 @@ import time
 
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
+from langchain_anthropic import ChatAnthropic
+from langchain_deepseek import ChatDeepSeek
 from langchain_community.callbacks.manager import get_openai_callback
 
 from src.graph.workflow import create_workflow
@@ -16,23 +18,53 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
+import streamlit as st
+
 with st.sidebar:
     st.title("⚙️ Configuration")
     st.divider()
-    
-    st.subheader("OpenAI API Settings")
-    api_key = st.text_input("Enter your OpenAI API key", type="password")
-    
-    if api_key:
-        if not api_key.startswith(('sk-', 'org-')):
-            st.error("Invalid API key format")
-            st.stop()
-        st.session_state.openai_api_key = api_key
-        st.success("API key configured! ✅")
-    else:
-        st.warning("⚠️ Please enter your OpenAI API key")
-        st.stop()
 
+    st.subheader("Select LLM Provider")
+    llm_provider = st.selectbox(
+        "Choose LLM",
+        ["OpenAI", "Claude", "DeepSeek"],
+        index=0
+    )
+
+    llm_models = {
+        "OpenAI": ["gpt-4o-mini", "gpt-4o"],
+        "Claude": ["claude-3.5-sonnet", "claude-3.7-sonnet"],
+        "DeepSeek": ["deepseek-chat"]
+    }
+
+    selected_model = st.selectbox(
+        "Choose Model",
+        llm_models[llm_provider]
+    )
+
+    st.subheader(f"{llm_provider} API Settings")
+    api_key = st.text_input(f"Enter your {llm_provider} API key", type="password")
+
+    session_key = f"{llm_provider.lower()}_api_key"
+
+    if api_key:
+        if llm_provider == "OpenAI" and not api_key.startswith(('sk-', 'org-')):
+            st.error("Invalid OpenAI API key format")
+            st.stop()
+        elif llm_provider == "Claude" and not api_key.startswith("sk-ant-"):
+            st.error("Invalid Claude API key format")
+            st.stop()
+        elif llm_provider == "DeepSeek" and not api_key.startswith("sk-"):
+            st.error("Invalid DeepSeek API key format")
+            st.stop()
+
+        st.session_state[session_key] = api_key
+        st.success(f"{llm_provider} API key configured! ✅")
+    else:
+        if session_key in st.session_state:
+            del st.session_state[session_key]
+        st.warning(f"⚠️ Please enter your {llm_provider} API key")
+        st.stop()
 
 st.title("📊 Data Analysis Assistant")
 
@@ -73,13 +105,30 @@ if uploaded_file:
             st.error("The file contains no data")
             st.stop()
         
-        llm = ChatOpenAI(
-            model="gpt-4o-mini",
-            temperature=0,
-            top_p=0.2,
-            api_key=st.session_state.openai_api_key
-        )
+        if llm_provider == "OpenAI":
+            llm = ChatOpenAI(
+                model=selected_model,
+                temperature=0,
+                top_p=0.2,
+                api_key=st.session_state["openai_api_key"]
+            )
+        elif llm_provider == "Claude":
+            llm = ChatAnthropic(
+                model=selected_model,
+                temperature=0,
+                top_p=0.2,
+                api_key=st.session_state["claude_api_key"]
+            )
+        elif llm_provider == "DeepSeek":
+            llm = ChatDeepSeek(
+                model=selected_model,
+                temperature=0,
+                top_p=0.2,
+                api_key=st.session_state["deepseek_api_key"]
+            )
 
+        st.write(f"LLM Configured: **{llm_provider} - {selected_model}** ✅")
+        
         workflow = create_workflow(llm, df)
 
         st.dataframe(
