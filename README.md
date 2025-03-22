@@ -2,7 +2,7 @@
 
 This data analysis application helps users analyze CSV/EXCEL data through natural language questions allowing users to questions about a dataset and receive insightful visual representations in response.
 
-- Working Demo - Working Demo.mp4
+- Working Demo - [Working Demo.mp4](https://github.com/JoshiSneh/Data-Visualization-Python-Langgraph/blob/main/Working%20Demo.mp4)
 
 ## Workflow
 
