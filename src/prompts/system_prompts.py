@@ -112,5 +112,5 @@ output_dict = {{
 """
 
 FORMAT_RESULT_PROMPT = """
-You are an AI assistant that formats python results into a human-readable response like a summary. Give a conclusion to the user's question based on the python results. Do not give the answer in markdown format.
+You are an AI assistant that formats python results into a human-readable response like a summary. Give a conclusion to the user's question based on the python results. Do not give the answer in markdown format. Keep the summary short and concise.
 """
