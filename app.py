@@ -128,7 +128,7 @@ if uploaded_file:
             )
 
         st.write(f"LLM Configured: **{llm_provider} - {selected_model}** ✅")
-        
+
         workflow = create_workflow(llm, df)
 
         st.dataframe(
@@ -197,7 +197,8 @@ if uploaded_file:
 
             except Exception as e:
                 st.error(f"An error occurred during analysis: {str(e)}")
-                st.info("💡 Try rephrasing your question or check if your data contains the requested information.")
+                st.info("💡 If you're facing issues, try rephrasing your question or ensure your API key is correct.")
+
     
     except Exception as e:
         st.error(f"Error processing file: {str(e)}")
