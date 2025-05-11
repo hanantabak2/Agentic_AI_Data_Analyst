@@ -11,20 +11,38 @@ from langchain_community.callbacks.manager import get_openai_callback
 
 from src.graph.workflow import create_workflow
 
-st.set_page_config(
-    page_title="Data Analysis Assistant",
-    page_icon="📊",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
 
-import streamlit as st
+#=================
+# Background Image , Chatbot Title and Logo
+#=================
+
+
+
+# Custom CSS for sidebar and overall page background styling
+sidebar_css = """
+<style>
+[data-testid="stSidebar"] {
+    background-color: #4B0F1E;
+}
+.stApp {
+    background-color: #E6E6DC;
+}
+.stApp > header {
+    background-color: #E6E6DC;
+}
+</style>
+"""
+st.markdown(sidebar_css, unsafe_allow_html=True)
+
+# Sidebar content - Logo and Introduction Text
+st.sidebar.image("assets/Logo.png", caption="", use_container_width=True)
+st.sidebar.image("assets/ai_data_analyst_agent.png", caption="", use_container_width=True)
+st.sidebar.image("assets/monitor.png", use_container_width=True)
+st.sidebar.markdown("<p style='color: white; font-size: 12px;'>______________________________________________</p>", unsafe_allow_html=True)
 
 with st.sidebar:
-    st.title("⚙️ Configuration")
     st.divider()
-
-    st.subheader("Select LLM Provider")
+    st.sidebar.markdown("<p style='color: white; font-size: 14px;'>Select LLM Provider</p>", unsafe_allow_html=True)
     llm_provider = st.selectbox(
         "Choose LLM",
         ["OpenAI", "Claude", "DeepSeek"],
@@ -38,11 +56,12 @@ with st.sidebar:
     }
 
     selected_model = st.selectbox(
-        "Choose Model",
+        "Choose Providor",
         llm_models[llm_provider]
     )
 
-    st.subheader(f"{llm_provider} API Settings")
+    st.divider()   
+    st.sidebar.markdown("<p style='color: white; font-size: 14px;'>API Settings</p>", unsafe_allow_html=True)
     api_key = st.text_input(f"Enter your {llm_provider} API key", type="password")
 
     session_key = f"{llm_provider.lower()}_api_key"
@@ -66,16 +85,16 @@ with st.sidebar:
         st.warning(f"⚠️ Please enter your {llm_provider} API key")
         st.stop()
 
-st.title("📊 Data Analysis Assistant")
+st.title("📊 AI Data Analyst")
 
 tab1, tab2 = st.tabs(["🎯 Overview", "📖 Instructions"])
 
 with tab1:
     st.markdown("""
-    Welcome to the Data Analysis Assistant! This tool helps you:
+    Welcome to AI Data Analyst! This tool helps you:
     - 📈 Analyze complex datasets with natural language
     - 🎨 Generate insightful visualizations
-    - 📝 Create detailed summaries and reports
+    - 📝 Create detailed summaries
     """)
 
 with tab2:
