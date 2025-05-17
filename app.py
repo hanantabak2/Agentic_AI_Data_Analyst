@@ -45,7 +45,7 @@ with st.sidebar:
     st.sidebar.markdown("<p style='color: white; font-size: 14px;'>Select LLM Provider</p>", unsafe_allow_html=True)
     llm_provider = st.selectbox(
         "Choose LLM",
-        ["OpenAI", "Claude", "DeepSeek"],
+        ["Openai", "Claude", "Deepseek"],
         index=0
     )
 
@@ -63,7 +63,7 @@ with st.sidebar:
     st.divider()   
     st.sidebar.markdown("<p style='color: white; font-size: 14px;'>API Settings</p>", unsafe_allow_html=True)
     api_key = st.text_input(f"Enter your {llm_provider} API key", type="password")
-    session_key = f"{llm_provider.lower()}_api_key"
+    session_key = f"{llm_provider.upper()}_API_KEY"
     os.environ[session_key] = api_key
     
     if api_key:
