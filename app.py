@@ -63,9 +63,9 @@ with st.sidebar:
     st.divider()   
     st.sidebar.markdown("<p style='color: white; font-size: 14px;'>API Settings</p>", unsafe_allow_html=True)
     api_key = st.text_input(f"Enter your {llm_provider} API key", type="password")
-
     session_key = f"{llm_provider.lower()}_api_key"
-
+    os.environ[session_key] = api_key
+    
     if api_key:
         if llm_provider == "OpenAI" and not api_key.startswith(('sk-', 'org-')):
             st.error("Invalid OpenAI API key format")
@@ -77,7 +77,7 @@ with st.sidebar:
             st.error("Invalid DeepSeek API key format")
             st.stop()
 
-        st.session_state[session_key] = api_key
+#        st.session_state[session_key] = api_key
         st.success(f"{llm_provider} API key configured! ✅")
     else:
         if session_key in st.session_state:
