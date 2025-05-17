@@ -41,20 +41,20 @@ st.sidebar.image("assets/monitor.png", use_container_width=True)
 st.sidebar.markdown("<p style='color: white; font-size: 12px;'>______________________________________________</p>", unsafe_allow_html=True)
 
 with st.sidebar:
-    st.divider()
+    st.sidebar.markdown("<p style='color: white; font-size: 14px;'>Choose OpenAI Model</p>", unsafe_allow_html=True)
     llm_provider = "OpenAI"
     llm_models = {
         "OpenAI": ["gpt-4o-mini", "gpt-4o"]
     }
 
     selected_model = st.selectbox(
-        "Choose Providor",
+        " ",
         llm_models[llm_provider]
     )
 
     st.divider()   
-    st.sidebar.markdown("<p style='color: white; font-size: 14px;'>API Settings</p>", unsafe_allow_html=True)
-    api_key = st.text_input(f"Enter your {llm_provider} API key", type="password")
+    st.sidebar.markdown("<p style='color: white; font-size: 14px;'>API Key</p>", unsafe_allow_html=True)
+    api_key = st.text_input(f" ", type="password")
     session_key = f"{llm_provider.upper()}_API_KEY"
     os.environ[session_key] = api_key
     
