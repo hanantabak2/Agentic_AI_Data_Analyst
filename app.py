@@ -211,7 +211,7 @@ if uploaded_file:
                             st.caption(f"Total Tokens Used: {cb.total_tokens}")
                         with col2:
                             st.caption(f"Analysis Cost: ${cb.total_cost:.4f}")
-                status.update(label="✅ Analysis Complete", state="complete")
+                status.update(label="✅ Analysis Complete. Click to See the Analysis Results", state="complete")
 
 
             except Exception as e:
