@@ -129,21 +129,21 @@ if uploaded_file:
                 model=selected_model,
                 temperature=0,
                 top_p=0.2,
-                api_key=st.session_state["openai_api_key"]
+   #             api_key=st.session_state["openai_api_key"]
             )
         elif llm_provider == "Claude":
             llm = ChatAnthropic(
                 model=selected_model,
                 temperature=0,
                 top_p=0.2,
-                api_key=st.session_state["claude_api_key"]
+    #            api_key=st.session_state["claude_api_key"]
             )
         elif llm_provider == "DeepSeek":
             llm = ChatDeepSeek(
                 model=selected_model,
                 temperature=0,
                 top_p=0.2,
-                api_key=st.session_state["deepseek_api_key"]
+    #          api_key=st.session_state["deepseek_api_key"]
             )
 
         st.write(f"LLM Configured: **{llm_provider} - {selected_model}** ✅")
