@@ -45,7 +45,7 @@ with st.sidebar:
     st.sidebar.markdown("<p style='color: white; font-size: 14px;'>Select LLM Provider</p>", unsafe_allow_html=True)
     llm_provider = st.selectbox(
         "Choose LLM",
-        ["Openai", "Claude", "Deepseek"],
+        ["OpenAI", "Claude", "DeepSeek"],
         index=0
     )
 
