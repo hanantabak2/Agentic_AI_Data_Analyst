@@ -180,7 +180,7 @@ if uploaded_file:
                             "iterations": 0
                         })
                         
-                        st.subheader("📋 Analysis Plan")
+                        st.subheader("📋 Analysis Steps")
                         st.code(state["task_plan"], language='python')
   
                         st.subheader("🔍 Generated Code")
