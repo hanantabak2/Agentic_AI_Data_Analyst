@@ -42,17 +42,9 @@ st.sidebar.markdown("<p style='color: white; font-size: 12px;'>_________________
 
 with st.sidebar:
     st.divider()
-    st.sidebar.markdown("<p style='color: white; font-size: 14px;'>Select LLM Provider</p>", unsafe_allow_html=True)
-    llm_provider = st.selectbox(
-        "Choose LLM",
-        ["OpenAI", "Claude", "DeepSeek"],
-        index=0
-    )
-
+    llm_provider = "OpenAI"
     llm_models = {
-        "OpenAI": ["gpt-4o-mini", "gpt-4o"],
-        "Claude": ["claude-3-5-sonnet-20240620", "claude-3-7-sonnet-20250219"],
-        "DeepSeek": ["deepseek-chat"]
+        "OpenAI": ["gpt-4o-mini", "gpt-4o"]
     }
 
     selected_model = st.selectbox(
